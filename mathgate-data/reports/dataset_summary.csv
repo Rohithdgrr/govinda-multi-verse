@@ -1,0 +1,6 @@
+source_dataset,total,valid,rejected,unmapped
+allenai/math_qa,5,5,0,0
+allenai/qasc,7,7,0,0
+https://github.com/Pluxia-GmbH/learnclash-open-trivia,5,5,0,0
+openai/gsm8k,7,7,0,0
+tohio/slm-synthetic-educational-qa-mcq-math,4,4,0,0

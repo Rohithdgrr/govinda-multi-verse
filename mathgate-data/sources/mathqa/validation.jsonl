@@ -1,0 +1,1 @@
+{"id": "MATHQA_VAL_0001", "Problem": "What is the area of a right triangle with base 16 cm and height 9 cm?", "Rationale": "Area = 0.5 * 16 * 9 = 72 sq cm.", "options": "a ) 64 , b ) 72 , c ) 80 , d ) 144", "correct": "b", "category": "geometry", "numeric_answer": "72"}

@@ -1,0 +1,6 @@
+{
+  "name": "GOVINDA",
+  "description": "Offline-first adaptive mathematical engine and structured practice trainer.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

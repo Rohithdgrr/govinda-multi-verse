@@ -1,0 +1,43 @@
+# Gradle & Kotlin
+.gradle/
+.kotlin/
+build/
+**/build/
+*.iml
+
+# Android Studio / IntelliJ IDEA
+.idea/caches
+.idea/libraries
+.idea/modules.xml
+.idea/workspace.xml
+.idea/navEditor.xml
+.idea/assetWizardSettings.xml
+.idea/deploymentTargetSelector.xml
+.idea/misc.xml
+captures/
+.externalNativeBuild/
+.cxx/
+
+# Local & Secrets
+local.properties
+.env
+*.jks
+*.keystore
+debug.keystore
+google-services.json
+
+# Build Outputs & Test Artifacts
+*.apk
+*.ap_
+*.aab
+*.dex
+*.class
+*.log
+*-debug.log
+lint-results*.html
+lint-results*.xml
+
+# OS Generated
+.DS_Store
+Thumbs.db
+*~

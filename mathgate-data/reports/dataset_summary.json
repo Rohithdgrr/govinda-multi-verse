@@ -1,0 +1,39 @@
+{
+  "generated_at": "2026-11-14T05:31:49.815906+00:00",
+  "total_records_inspected": 28,
+  "total_validated_records": 28,
+  "total_rejected_records": 0,
+  "total_unmapped_records": 0,
+  "datasets": {
+    "allenai/qasc": {
+      "total": 7,
+      "valid": 7,
+      "rejected": 0,
+      "unmapped": 0
+    },
+    "openai/gsm8k": {
+      "total": 7,
+      "valid": 7,
+      "rejected": 0,
+      "unmapped": 0
+    },
+    "allenai/math_qa": {
+      "total": 5,
+      "valid": 5,
+      "rejected": 0,
+      "unmapped": 0
+    },
+    "tohio/slm-synthetic-educational-qa-mcq-math": {
+      "total": 4,
+      "valid": 4,
+      "rejected": 0,
+      "unmapped": 0
+    },
+    "https://github.com/Pluxia-GmbH/learnclash-open-trivia": {
+      "total": 5,
+      "valid": 5,
+      "rejected": 0,
+      "unmapped": 0
+    }
+  }
+}

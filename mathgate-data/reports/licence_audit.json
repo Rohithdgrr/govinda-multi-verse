@@ -1,0 +1,101 @@
+{
+  "policy_mode": "PERMISSIVE_COMMERCIAL_SAFE_ONLY",
+  "allowed_licenses": [
+    "MIT",
+    "Apache-2.0",
+    "CC-BY-4.0"
+  ],
+  "audited_sources": {
+    "qasc": {
+      "enabled": true,
+      "license": "CC-BY-4.0",
+      "commercial_safe": true,
+      "repository": "allenai/qasc",
+      "reason": "Permissive commercial-safe license verified"
+    },
+    "arc_easy": {
+      "enabled": false,
+      "license": "CC-BY-SA-4.0",
+      "commercial_safe": false,
+      "repository": "allenai/ai2_arc",
+      "reason": "Excluded under strict Permissive Commercial-Safe policy due to CC BY-SA 4.0 ShareAlike copyleft obligations on adapted question banks"
+    },
+    "arc_challenge": {
+      "enabled": false,
+      "license": "CC-BY-SA-4.0",
+      "commercial_safe": false,
+      "repository": "allenai/ai2_arc",
+      "reason": "Excluded under strict Permissive Commercial-Safe policy due to CC BY-SA 4.0 ShareAlike copyleft obligations"
+    },
+    "sciq": {
+      "enabled": false,
+      "license": "CC-BY-NC-3.0",
+      "commercial_safe": false,
+      "repository": "allenai/sciq",
+      "reason": "Requires non-commercial distribution compliance (CC BY-NC 3.0); prohibited in commercial releases without separate license"
+    },
+    "gsm8k": {
+      "enabled": true,
+      "license": "MIT",
+      "commercial_safe": true,
+      "repository": "openai/gsm8k",
+      "reason": "Permissive commercial-safe license verified"
+    },
+    "mathqa": {
+      "enabled": true,
+      "license": "Apache-2.0",
+      "commercial_safe": true,
+      "repository": "allenai/math_qa",
+      "reason": "Permissive commercial-safe license verified"
+    },
+    "synthetic_math": {
+      "enabled": true,
+      "license": "MIT",
+      "commercial_safe": true,
+      "repository": "tohio/slm-synthetic-educational-qa-mcq-math",
+      "reason": "Permissive commercial-safe license verified"
+    },
+    "physics_eval": {
+      "enabled": false,
+      "license": "CC-BY-SA-4.0",
+      "commercial_safe": false,
+      "repository": "IUTVanguard/PhysicsEval",
+      "reason": "Pending underlying textbook/website source-rights provenance audit and CC BY-SA 4.0 ShareAlike restriction"
+    },
+    "open_trivia": {
+      "enabled": false,
+      "license": "CC-BY-SA-4.0",
+      "commercial_safe": false,
+      "repository": "https://github.com/uberspot/OpenTriviaQA",
+      "reason": "Excluded by default under strict Permissive Commercial-Safe policy (CC BY-SA 4.0); parser implemented for optional ShareAlike packs"
+    },
+    "learnclash_trivia": {
+      "enabled": true,
+      "license": "CC-BY-4.0",
+      "commercial_safe": true,
+      "repository": "https://github.com/Pluxia-GmbH/learnclash-open-trivia",
+      "reason": "Permissive commercial-safe license verified"
+    },
+    "indian_exams": {
+      "enabled": false,
+      "license": "PROPRIETARY_EXAM_AUTHORITY",
+      "commercial_safe": false,
+      "repository": "Abhay557/indian-exams-rawdata",
+      "reason": "Original GATE, JEE Main, JEE Advanced, SSC, RRB, and UPSC papers remain the intellectual property of the respective examination authorities"
+    },
+    "openstax": {
+      "enabled": false,
+      "license": "CC-BY-NC-SA-4.0",
+      "commercial_safe": false,
+      "repository": "https://openstax.org/subjects",
+      "reason": "Standard textbook license CC BY-NC-SA 4.0 prohibits commercial bundling without separate rights"
+    },
+    "ncert": {
+      "enabled": false,
+      "license": "NCERT_RESTRICTED",
+      "commercial_safe": false,
+      "repository": "https://ncert.nic.in/textbook.php",
+      "reason": "NCERT terms prohibit republication or bundling of textbook text/diagrams into software without prior written permission"
+    }
+  }
+}

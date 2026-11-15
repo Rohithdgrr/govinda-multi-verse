@@ -1,0 +1,8 @@
+{
+  "sqlite_file": "output/sqlite/mathgate_question_bank.db",
+  "size_bytes": 167936,
+  "subjects_count": 5,
+  "topics_count": 13,
+  "questions_count": 28,
+  "options_count": 84
+}

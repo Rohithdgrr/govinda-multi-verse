@@ -1,0 +1,7 @@
+{
+  "generated_at": "2026-11-14T05:31:49.817189+00:00",
+  "validated_jsonl": "output/jsonl/mathgate_validated.jsonl",
+  "sqlite_target": "output/sqlite/mathgate_question_bank.db",
+  "validated_record_count": 28,
+  "content_version": 1
+}

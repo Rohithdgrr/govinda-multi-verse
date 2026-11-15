@@ -1,0 +1,6 @@
+#Q Which scientist formulated the laws of motion and universal gravitation?
+^ Isaac Newton
+A Galileo Galilei
+B Isaac Newton
+C Johannes Kepler
+D Nikola Tesla

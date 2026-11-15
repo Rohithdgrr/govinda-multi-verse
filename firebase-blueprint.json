@@ -1,0 +1,113 @@
+{
+  "entities": {
+    "CloudConversation": {
+      "description": "A user-scoped WhatsApp-style chat conversation or group thread stored in Firestore.",
+      "fields": {
+        "userId": { "type": "string", "required": true, "maxLength": 128, "immutable": true },
+        "title": { "type": "string", "required": true, "minLength": 1, "maxLength": 120 },
+        "type": { "type": "string", "required": true, "enum": ["DIRECT_PEER", "STUDY_GROUP", "PERSONAL_NOTES"] },
+        "peerCode": { "type": "string", "required": true, "minLength": 1, "maxLength": 64, "immutable": true },
+        "lastMessagePreview": { "type": "string", "required": true, "maxLength": 500 },
+        "subtitle": { "type": "string", "required": false, "maxLength": 160 },
+        "avatarColorHex": { "type": "string", "required": false, "maxLength": 16 },
+        "isPinned": { "type": "boolean", "required": false },
+        "isArchived": { "type": "boolean", "required": false },
+        "isMuted": { "type": "boolean", "required": false },
+        "isBlocked": { "type": "boolean", "required": false },
+        "createdAt": { "type": "timestamp", "required": true, "immutable": true },
+        "updatedAt": { "type": "timestamp", "required": true }
+      }
+    },
+    "CloudChatMessage": {
+      "description": "A real-time chat message supporting rich text, compressed Base64 images, documents/files, GPS live/static locations, voice notes, polls, and LaTeX.",
+      "fields": {
+        "userId": { "type": "string", "required": true, "maxLength": 128, "immutable": true },
+        "conversationId": { "type": "string", "required": true, "maxLength": 128, "immutable": true },
+        "senderId": { "type": "string", "required": true, "maxLength": 128, "immutable": true },
+        "senderName": { "type": "string", "required": true, "minLength": 1, "maxLength": 100, "immutable": true },
+        "content": { "type": "string", "required": true, "minLength": 1, "maxLength": 5000 },
+        "messageType": { "type": "string", "required": true, "maxLength": 40, "immutable": true },
+        "deliveryStatus": { "type": "string", "required": true, "enum": ["SENDING", "SENT", "DELIVERED", "READ"] },
+        "attachmentUri": { "type": "string", "required": false, "maxLength": 1024 },
+        "attachmentName": { "type": "string", "required": false, "maxLength": 255 },
+        "attachmentMimeType": { "type": "string", "required": false, "maxLength": 120 },
+        "attachmentSizeBytes": { "type": "number", "required": false, "min": 0, "max": 52428800 },
+        "attachmentBase64": { "type": "string", "required": false, "maxLength": 250000 },
+        "latitude": { "type": "number", "required": false, "min": -90, "max": 90 },
+        "longitude": { "type": "number", "required": false, "min": -180, "max": 180 },
+        "locationLabel": { "type": "string", "required": false, "maxLength": 200 },
+        "liveLocationDurationMinutes": { "type": "number", "required": false, "min": 0, "max": 480 },
+        "latexFormula": { "type": "string", "required": false, "maxLength": 2000 },
+        "replyToMessageId": { "type": "string", "required": false, "maxLength": 128 },
+        "replyToPreview": { "type": "string", "required": false, "maxLength": 300 },
+        "reactionEmoji": { "type": "string", "required": false, "maxLength": 32 },
+        "isStarred": { "type": "boolean", "required": false },
+        "isPinned": { "type": "boolean", "required": false },
+        "isEdited": { "type": "boolean", "required": false },
+        "isDeletedForEveryone": { "type": "boolean", "required": false },
+        "isViewOnce": { "type": "boolean", "required": false },
+        "isViewOnceOpened": { "type": "boolean", "required": false },
+        "createdAt": { "type": "timestamp", "required": true, "immutable": true },
+        "updatedAt": { "type": "timestamp", "required": true }
+      }
+    },
+    "SharedRoomMessage": {
+      "description": "A multi-participant message inside a shared OTP/QR peer room.",
+      "fields": {
+        "roomId": { "type": "string", "required": true, "maxLength": 128, "immutable": true },
+        "senderUid": { "type": "string", "required": true, "maxLength": 128, "immutable": true },
+        "senderName": { "type": "string", "required": true, "minLength": 1, "maxLength": 100, "immutable": true },
+        "participantUids": { "type": "array", "required": true, "maxItems": 50 },
+        "content": { "type": "string", "required": true, "minLength": 1, "maxLength": 5000 },
+        "messageType": { "type": "string", "required": true, "maxLength": 40, "immutable": true },
+        "deliveryStatus": { "type": "string", "required": true, "enum": ["SENDING", "SENT", "DELIVERED", "READ"] },
+        "attachmentName": { "type": "string", "required": false, "maxLength": 255 },
+        "attachmentMimeType": { "type": "string", "required": false, "maxLength": 120 },
+        "attachmentSizeBytes": { "type": "number", "required": false, "min": 0, "max": 52428800 },
+        "attachmentBase64": { "type": "string", "required": false, "maxLength": 250000 },
+        "latitude": { "type": "number", "required": false, "min": -90, "max": 90 },
+        "longitude": { "type": "number", "required": false, "min": -180, "max": 180 },
+        "locationLabel": { "type": "string", "required": false, "maxLength": 200 },
+        "liveLocationDurationMinutes": { "type": "number", "required": false, "min": 0, "max": 480 },
+        "latexFormula": { "type": "string", "required": false, "maxLength": 2000 },
+        "replyToMessageId": { "type": "string", "required": false, "maxLength": 128 },
+        "replyToPreview": { "type": "string", "required": false, "maxLength": 300 },
+        "reactionEmoji": { "type": "string", "required": false, "maxLength": 32 },
+        "createdAt": { "type": "timestamp", "required": true, "immutable": true },
+        "updatedAt": { "type": "timestamp", "required": true }
+      }
+    }
+  },
+  "collections": [
+    {
+      "path": "/users/{userId}/conversations/{conversationId}",
+      "entity": "CloudConversation",
+      "access": {
+        "read": "isSignedIn() && request.auth.uid == userId",
+        "create": "isSignedIn() && request.auth.uid == userId && incoming().userId == userId",
+        "update": "isSignedIn() && request.auth.uid == userId && immutable(userId, peerCode, type, createdAt)",
+        "delete": "isSignedIn() && request.auth.uid == userId"
+      }
+    },
+    {
+      "path": "/users/{userId}/messages/{messageId}",
+      "entity": "CloudChatMessage",
+      "access": {
+        "read": "isSignedIn() && request.auth.uid == userId",
+        "create": "isSignedIn() && request.auth.uid == userId && incoming().userId == userId",
+        "update": "isSignedIn() && request.auth.uid == userId && immutable(userId, conversationId, senderId, createdAt)",
+        "delete": "isSignedIn() && request.auth.uid == userId"
+      }
+    },
+    {
+      "path": "/rooms/{roomId}/messages/{messageId}",
+      "entity": "SharedRoomMessage",
+      "access": {
+        "read": "isSignedIn() && request.auth.uid in resource.data.participantUids",
+        "create": "isSignedIn() && incoming().senderUid == request.auth.uid && request.auth.uid in incoming().participantUids",
+        "update": "isSignedIn() && request.auth.uid in resource.data.participantUids && immutable(roomId, senderUid, createdAt)",
+        "delete": "isSignedIn() && resource.data.senderUid == request.auth.uid"
+      }
+    }
+  ]
+}

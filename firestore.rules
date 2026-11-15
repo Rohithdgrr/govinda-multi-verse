@@ -1,0 +1,230 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Pillar 1: Default Deny at the root
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Pillar 2: Global Helper Functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+    function incoming() {
+      return request.resource.data;
+    }
+    function existing() {
+      return resource.data;
+    }
+    function isValidId(id) {
+      return id is string && id.size() >= 1 && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+    function isValidOptionalString(data, field, maxLen) {
+      return !(field in data) || data[field] == null || (data[field] is string && data[field].size() <= maxLen);
+    }
+    function isValidOptionalBool(data, field) {
+      return !(field in data) || data[field] == null || data[field] is bool;
+    }
+    function isValidOptionalNumber(data, field, minVal, maxVal) {
+      return !(field in data) || data[field] == null ||
+        ((data[field] is int || data[field] is float) && data[field] >= minVal && data[field] <= maxVal);
+    }
+
+    // Pillar 3: Strict Schema & Data Type Validation
+    function isValidConversation(data) {
+      let requiredKeys = ['userId', 'title', 'type', 'peerCode', 'lastMessagePreview', 'createdAt', 'updatedAt'];
+      let allowedKeys = [
+        'userId', 'title', 'type', 'peerCode', 'lastMessagePreview',
+        'subtitle', 'avatarColorHex', 'isPinned', 'isArchived', 'isMuted', 'isBlocked',
+        'createdAt', 'updatedAt'
+      ];
+      return data.keys().hasAll(requiredKeys) &&
+             data.keys().hasOnly(allowedKeys) &&
+             data.userId is string && data.userId.size() >= 1 && data.userId.size() <= 128 &&
+             data.title is string && data.title.size() >= 1 && data.title.size() <= 120 &&
+             data.type in ['DIRECT_PEER', 'STUDY_GROUP', 'PERSONAL_NOTES'] &&
+             data.peerCode is string && data.peerCode.size() >= 1 && data.peerCode.size() <= 64 &&
+             data.lastMessagePreview is string && data.lastMessagePreview.size() <= 500 &&
+             isValidOptionalString(data, 'subtitle', 160) &&
+             isValidOptionalString(data, 'avatarColorHex', 16) &&
+             isValidOptionalBool(data, 'isPinned') &&
+             isValidOptionalBool(data, 'isArchived') &&
+             isValidOptionalBool(data, 'isMuted') &&
+             isValidOptionalBool(data, 'isBlocked');
+    }
+
+    function isValidMessage(data) {
+      let requiredKeys = [
+        'userId', 'conversationId', 'senderId', 'senderName',
+        'content', 'messageType', 'deliveryStatus', 'createdAt', 'updatedAt'
+      ];
+      let allowedKeys = [
+        'userId', 'conversationId', 'senderId', 'senderName',
+        'content', 'messageType', 'deliveryStatus',
+        'attachmentUri', 'attachmentName', 'attachmentMimeType',
+        'attachmentSizeBytes', 'attachmentBase64',
+        'latitude', 'longitude', 'locationLabel', 'liveLocationDurationMinutes',
+        'latexFormula', 'replyToMessageId', 'replyToPreview', 'reactionEmoji',
+        'isStarred', 'isPinned', 'isEdited', 'isDeletedForEveryone',
+        'isViewOnce', 'isViewOnceOpened',
+        'createdAt', 'updatedAt'
+      ];
+      return data.keys().hasAll(requiredKeys) &&
+             data.keys().hasOnly(allowedKeys) &&
+             data.userId is string && data.userId.size() >= 1 && data.userId.size() <= 128 &&
+             data.conversationId is string && data.conversationId.size() >= 1 && data.conversationId.size() <= 128 &&
+             data.senderId is string && data.senderId.size() >= 1 && data.senderId.size() <= 128 &&
+             data.senderName is string && data.senderName.size() >= 1 && data.senderName.size() <= 100 &&
+             data.content is string && data.content.size() >= 1 && data.content.size() <= 5000 &&
+             data.messageType is string && data.messageType.size() >= 1 && data.messageType.size() <= 40 &&
+             data.deliveryStatus in ['SENDING', 'SENT', 'DELIVERED', 'READ'] &&
+             isValidOptionalString(data, 'attachmentUri', 1024) &&
+             isValidOptionalString(data, 'attachmentName', 255) &&
+             isValidOptionalString(data, 'attachmentMimeType', 120) &&
+             isValidOptionalNumber(data, 'attachmentSizeBytes', 0, 52428800) &&
+             isValidOptionalString(data, 'attachmentBase64', 250000) &&
+             isValidOptionalNumber(data, 'latitude', -90, 90) &&
+             isValidOptionalNumber(data, 'longitude', -180, 180) &&
+             isValidOptionalString(data, 'locationLabel', 200) &&
+             isValidOptionalNumber(data, 'liveLocationDurationMinutes', 0, 480) &&
+             isValidOptionalString(data, 'latexFormula', 2000) &&
+             isValidOptionalString(data, 'replyToMessageId', 128) &&
+             isValidOptionalString(data, 'replyToPreview', 300) &&
+             isValidOptionalString(data, 'reactionEmoji', 32) &&
+             isValidOptionalBool(data, 'isStarred') &&
+             isValidOptionalBool(data, 'isPinned') &&
+             isValidOptionalBool(data, 'isEdited') &&
+             isValidOptionalBool(data, 'isDeletedForEveryone') &&
+             isValidOptionalBool(data, 'isViewOnce') &&
+             isValidOptionalBool(data, 'isViewOnceOpened');
+    }
+
+    function isValidRoomMessage(data) {
+      let requiredKeys = [
+        'roomId', 'senderUid', 'senderName', 'participantUids',
+        'content', 'messageType', 'deliveryStatus', 'createdAt', 'updatedAt'
+      ];
+      let allowedKeys = [
+        'roomId', 'senderUid', 'senderName', 'participantUids',
+        'content', 'messageType', 'deliveryStatus',
+        'attachmentName', 'attachmentMimeType', 'attachmentSizeBytes', 'attachmentBase64',
+        'latitude', 'longitude', 'locationLabel', 'liveLocationDurationMinutes',
+        'latexFormula', 'replyToMessageId', 'replyToPreview', 'reactionEmoji',
+        'createdAt', 'updatedAt'
+      ];
+      return data.keys().hasAll(requiredKeys) &&
+             data.keys().hasOnly(allowedKeys) &&
+             data.roomId is string && data.roomId.size() >= 1 && data.roomId.size() <= 128 &&
+             data.senderUid is string && data.senderUid.size() >= 1 && data.senderUid.size() <= 128 &&
+             data.senderName is string && data.senderName.size() >= 1 && data.senderName.size() <= 100 &&
+             data.participantUids is list && data.participantUids.size() >= 1 && data.participantUids.size() <= 50 &&
+             data.content is string && data.content.size() >= 1 && data.content.size() <= 5000 &&
+             data.messageType is string && data.messageType.size() >= 1 && data.messageType.size() <= 40 &&
+             data.deliveryStatus in ['SENDING', 'SENT', 'DELIVERED', 'READ'] &&
+             isValidOptionalString(data, 'attachmentName', 255) &&
+             isValidOptionalString(data, 'attachmentMimeType', 120) &&
+             isValidOptionalNumber(data, 'attachmentSizeBytes', 0, 52428800) &&
+             isValidOptionalString(data, 'attachmentBase64', 250000) &&
+             isValidOptionalNumber(data, 'latitude', -90, 90) &&
+             isValidOptionalNumber(data, 'longitude', -180, 180) &&
+             isValidOptionalString(data, 'locationLabel', 200) &&
+             isValidOptionalNumber(data, 'liveLocationDurationMinutes', 0, 480) &&
+             isValidOptionalString(data, 'latexFormula', 2000) &&
+             isValidOptionalString(data, 'replyToMessageId', 128) &&
+             isValidOptionalString(data, 'replyToPreview', 300) &&
+             isValidOptionalString(data, 'reactionEmoji', 32);
+    }
+
+    // User-scoped conversations
+    match /users/{userId}/conversations/{conversationId} {
+      allow get, list, delete: if isSignedIn() && request.auth.uid == userId;
+
+      allow create: if isSignedIn() &&
+                       request.auth.uid == userId &&
+                       isValidId(conversationId) &&
+                       isValidConversation(incoming()) &&
+                       incoming().userId == userId &&
+                       incoming().createdAt is timestamp &&
+                       incoming().createdAt <= request.time &&
+                       incoming().updatedAt is timestamp &&
+                       incoming().updatedAt <= request.time;
+
+      allow update: if isSignedIn() &&
+                       request.auth.uid == userId &&
+                       isValidConversation(incoming()) &&
+                       incoming().userId == existing().userId &&
+                       incoming().type == existing().type &&
+                       incoming().peerCode == existing().peerCode &&
+                       incoming().createdAt == existing().createdAt &&
+                       incoming().updatedAt is timestamp &&
+                       incoming().updatedAt <= request.time &&
+                       incoming().diff(existing()).affectedKeys().hasOnly([
+                         'title', 'subtitle', 'lastMessagePreview',
+                         'isPinned', 'isArchived', 'isMuted', 'isBlocked', 'updatedAt'
+                       ]);
+    }
+
+    // User-scoped real-time messages
+    match /users/{userId}/messages/{messageId} {
+      allow get, list, delete: if isSignedIn() && request.auth.uid == userId;
+
+      allow create: if isSignedIn() &&
+                       request.auth.uid == userId &&
+                       isValidId(messageId) &&
+                       isValidMessage(incoming()) &&
+                       incoming().userId == userId &&
+                       incoming().createdAt is timestamp &&
+                       incoming().createdAt <= request.time &&
+                       incoming().updatedAt is timestamp &&
+                       incoming().updatedAt <= request.time;
+
+      allow update: if isSignedIn() &&
+                       request.auth.uid == userId &&
+                       isValidMessage(incoming()) &&
+                       incoming().userId == existing().userId &&
+                       incoming().conversationId == existing().conversationId &&
+                       incoming().senderId == existing().senderId &&
+                       incoming().createdAt == existing().createdAt &&
+                       incoming().updatedAt is timestamp &&
+                       incoming().updatedAt <= request.time &&
+                       incoming().diff(existing()).affectedKeys().hasOnly([
+                         'content', 'deliveryStatus', 'reactionEmoji',
+                         'isStarred', 'isPinned', 'isEdited', 'isDeletedForEveryone',
+                         'isViewOnceOpened', 'latitude', 'longitude', 'updatedAt'
+                       ]);
+    }
+
+    // Shared peer/group rooms keyed by roomId (6-digit OTP or QR room ID)
+    match /rooms/{roomId}/messages/{messageId} {
+      allow get, list: if isSignedIn() && request.auth.uid in existing().participantUids;
+
+      allow create: if isSignedIn() &&
+                       isValidId(roomId) &&
+                       isValidId(messageId) &&
+                       isValidRoomMessage(incoming()) &&
+                       incoming().roomId == roomId &&
+                       incoming().senderUid == request.auth.uid &&
+                       request.auth.uid in incoming().participantUids &&
+                       incoming().createdAt is timestamp &&
+                       incoming().createdAt <= request.time &&
+                       incoming().updatedAt is timestamp &&
+                       incoming().updatedAt <= request.time;
+
+      allow update: if isSignedIn() &&
+                       request.auth.uid in existing().participantUids &&
+                       isValidRoomMessage(incoming()) &&
+                       incoming().roomId == existing().roomId &&
+                       incoming().senderUid == existing().senderUid &&
+                       incoming().createdAt == existing().createdAt &&
+                       incoming().updatedAt is timestamp &&
+                       incoming().updatedAt <= request.time &&
+                       incoming().diff(existing()).affectedKeys().hasOnly([
+                         'content', 'deliveryStatus', 'reactionEmoji',
+                         'latitude', 'longitude', 'updatedAt'
+                       ]);
+
+      allow delete: if isSignedIn() && existing().senderUid == request.auth.uid;
+    }
+  }
+}

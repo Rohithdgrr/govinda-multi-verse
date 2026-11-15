@@ -1,0 +1,26 @@
+MATHGATE / GOVINDA — Open Dataset License Registry
+===================================================
+Policy Mode: PERMISSIVE_COMMERCIAL_SAFE_ONLY
+Allowed Licenses: MIT, Apache-2.0, CC-BY-4.0
+
+- qasc: ENABLED | License=CC-BY-4.0 | Repo=allenai/qasc
+- arc_easy: DISABLED | License=CC-BY-SA-4.0 | Repo=allenai/ai2_arc
+  Reason: Excluded under strict Permissive Commercial-Safe policy due to CC BY-SA 4.0 ShareAlike copyleft obligations on adapted question banks
+- arc_challenge: DISABLED | License=CC-BY-SA-4.0 | Repo=allenai/ai2_arc
+  Reason: Excluded under strict Permissive Commercial-Safe policy due to CC BY-SA 4.0 ShareAlike copyleft obligations
+- sciq: DISABLED | License=CC-BY-NC-3.0 | Repo=allenai/sciq
+  Reason: Requires non-commercial distribution compliance (CC BY-NC 3.0); prohibited in commercial releases without separate license
+- gsm8k: ENABLED | License=MIT | Repo=openai/gsm8k
+- mathqa: ENABLED | License=Apache-2.0 | Repo=allenai/math_qa
+- synthetic_math: ENABLED | License=MIT | Repo=tohio/slm-synthetic-educational-qa-mcq-math
+- physics_eval: DISABLED | License=CC-BY-SA-4.0 | Repo=IUTVanguard/PhysicsEval
+  Reason: Pending underlying textbook/website source-rights provenance audit and CC BY-SA 4.0 ShareAlike restriction
+- open_trivia: DISABLED | License=CC-BY-SA-4.0 | Repo=https://github.com/uberspot/OpenTriviaQA
+  Reason: Excluded by default under strict Permissive Commercial-Safe policy (CC BY-SA 4.0); parser implemented for optional ShareAlike packs
+- learnclash_trivia: ENABLED | License=CC-BY-4.0 | Repo=https://github.com/Pluxia-GmbH/learnclash-open-trivia
+- indian_exams: DISABLED | License=PROPRIETARY_EXAM_AUTHORITY | Repo=Abhay557/indian-exams-rawdata
+  Reason: Original GATE, JEE Main, JEE Advanced, SSC, RRB, and UPSC papers remain the intellectual property of the respective examination authorities
+- openstax: DISABLED | License=CC-BY-NC-SA-4.0 | Repo=https://openstax.org/subjects
+  Reason: Standard textbook license CC BY-NC-SA 4.0 prohibits commercial bundling without separate rights
+- ncert: DISABLED | License=NCERT_RESTRICTED | Repo=https://ncert.nic.in/textbook.php
+  Reason: NCERT terms prohibit republication or bundling of textbook text/diagrams into software without prior written permission

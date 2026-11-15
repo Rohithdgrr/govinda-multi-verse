@@ -1,0 +1,126 @@
+{
+  "executed_at": "2026-11-14T05:31:49.675687+00:00",
+  "policy_mode": "PERMISSIVE_COMMERCIAL_SAFE_ONLY",
+  "sources": {
+    "qasc": {
+      "status": "DOWNLOADED",
+      "repository": "allenai/qasc",
+      "license": "CC-BY-4.0",
+      "pinned_revision": "main@qasc-v1",
+      "splits": {
+        "train": {
+          "file": "sources/qasc/train.jsonl",
+          "records": 5,
+          "sha256": "575acec77f7a14d00a81dd55e3c83226b4b265748328e65dbb7f3ca39ea493c6"
+        },
+        "validation": {
+          "file": "sources/qasc/validation.jsonl",
+          "records": 2,
+          "sha256": "7101e7564fa1a909d9b1ee1618ad802f81a928c8f775a3b497848135e94e3a1d"
+        }
+      }
+    },
+    "arc_easy": {
+      "status": "SKIPPED_BY_POLICY",
+      "license": "CC-BY-SA-4.0",
+      "reason": "Excluded under strict Permissive Commercial-Safe policy due to CC BY-SA 4.0 ShareAlike copyleft obligations on adapted question banks"
+    },
+    "arc_challenge": {
+      "status": "SKIPPED_BY_POLICY",
+      "license": "CC-BY-SA-4.0",
+      "reason": "Excluded under strict Permissive Commercial-Safe policy due to CC BY-SA 4.0 ShareAlike copyleft obligations"
+    },
+    "sciq": {
+      "status": "SKIPPED_BY_POLICY",
+      "license": "CC-BY-NC-3.0",
+      "reason": "Requires non-commercial distribution compliance (CC BY-NC 3.0); prohibited in commercial releases without separate license"
+    },
+    "gsm8k": {
+      "status": "DOWNLOADED",
+      "repository": "openai/gsm8k",
+      "license": "MIT",
+      "pinned_revision": "main@gsm8k-v1",
+      "splits": {
+        "train": {
+          "file": "sources/gsm8k/train.jsonl",
+          "records": 5,
+          "sha256": "e8f9c843a567796d80741d6f06b92b2f18c3ae2091d436cf93d0153890cc200e"
+        },
+        "test": {
+          "file": "sources/gsm8k/test.jsonl",
+          "records": 2,
+          "sha256": "55f148091268bc261fff5b8667186d4b4e8c601fec33e6101155cfc0777b75cd"
+        }
+      }
+    },
+    "mathqa": {
+      "status": "DOWNLOADED",
+      "repository": "allenai/math_qa",
+      "license": "Apache-2.0",
+      "pinned_revision": "static-export@mathqa-v1",
+      "splits": {
+        "train": {
+          "file": "sources/mathqa/train.jsonl",
+          "records": 4,
+          "sha256": "750cc64cfa0fedd8421ef9e71482f01f6cac2acc99f3a544f78a55e1c0f1dbe3"
+        },
+        "validation": {
+          "file": "sources/mathqa/validation.jsonl",
+          "records": 1,
+          "sha256": "1f1d485de28453668d854b98bf96a592ed2d2691f6266f4bab97aa9cb6ccae69"
+        }
+      }
+    },
+    "synthetic_math": {
+      "status": "DOWNLOADED",
+      "repository": "tohio/slm-synthetic-educational-qa-mcq-math",
+      "license": "MIT",
+      "pinned_revision": "main@synthetic-sample",
+      "splits": {
+        "train": {
+          "file": "sources/synthetic_math/train.jsonl",
+          "records": 4,
+          "sha256": "0f887ad1f0c9bc4710e48e72bef1215a5f8d6fc1061ff7f99ddde9f898ef6f34"
+        }
+      }
+    },
+    "physics_eval": {
+      "status": "SKIPPED_BY_POLICY",
+      "license": "CC-BY-SA-4.0",
+      "reason": "Pending underlying textbook/website source-rights provenance audit and CC BY-SA 4.0 ShareAlike restriction"
+    },
+    "open_trivia": {
+      "status": "SKIPPED_BY_POLICY",
+      "license": "CC-BY-SA-4.0",
+      "reason": "Excluded by default under strict Permissive Commercial-Safe policy (CC BY-SA 4.0); parser implemented for optional ShareAlike packs"
+    },
+    "learnclash_trivia": {
+      "status": "DOWNLOADED",
+      "repository": "https://github.com/Pluxia-GmbH/learnclash-open-trivia",
+      "license": "CC-BY-4.0",
+      "pinned_revision": "main@learnclash-v1",
+      "splits": {
+        "train": {
+          "file": "sources/learnclash_trivia/train.jsonl",
+          "records": 5,
+          "sha256": "441274dd2ea92a897a7f5431d79c1f005a70cb0bff35bb26ea746364c01d84a8"
+        }
+      }
+    },
+    "indian_exams": {
+      "status": "SKIPPED_BY_POLICY",
+      "license": "PROPRIETARY_EXAM_AUTHORITY",
+      "reason": "Original GATE, JEE Main, JEE Advanced, SSC, RRB, and UPSC papers remain the intellectual property of the respective examination authorities"
+    },
+    "openstax": {
+      "status": "SKIPPED_BY_POLICY",
+      "license": "CC-BY-NC-SA-4.0",
+      "reason": "Standard textbook license CC BY-NC-SA 4.0 prohibits commercial bundling without separate rights"
+    },
+    "ncert": {
+      "status": "SKIPPED_BY_POLICY",
+      "license": "NCERT_RESTRICTED",
+      "reason": "NCERT terms prohibit republication or bundling of textbook text/diagrams into software without prior written permission"
+    }
+  }
+}

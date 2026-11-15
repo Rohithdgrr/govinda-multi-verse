@@ -1,0 +1,2 @@
+{"id": "GSM8K_TEST_0001", "question": "A water tank holds 900 liters. If a pump drains 45 liters per minute, how many minutes does it take to empty the tank?", "answer": "Time required is 900 / 45 = <<900/45=20>>20 minutes.\n#### 20"}
+{"id": "GSM8K_TEST_0002", "question": "Rohan scored 78, 84, 90, and 88 in four mathematics tests. What is his average score?", "answer": "Total score is 78 + 84 + 90 + 88 = <<78+84+90+88=340>>340.\nAverage score is 340 / 4 = <<340/4=85>>85.\n#### 85"}

@@ -1,0 +1,69 @@
+# MATHGATE Dataset Acquisition Policy (YAML Mirror)
+policy:
+  mode: PERMISSIVE_COMMERCIAL_SAFE_ONLY
+  allowed_licenses:
+    - MIT
+    - Apache-2.0
+    - CC-BY-4.0
+  allow_trust_remote_code: false
+
+datasets:
+  qasc:
+    enabled: true
+    repository: allenai/qasc
+    license: CC-BY-4.0
+    splits: [train, validation]
+
+  arc:
+    enabled: false
+    repository: allenai/ai2_arc
+    license: CC-BY-SA-4.0
+    reason: Excluded under strict Permissive Commercial-Safe policy (ShareAlike copyleft)
+
+  sciq:
+    enabled: false
+    repository: allenai/sciq
+    license: CC-BY-NC-3.0
+    reason: Requires non-commercial distribution compliance
+
+  gsm8k:
+    enabled: true
+    repository: openai/gsm8k
+    config: main
+    license: MIT
+    splits: [train, test]
+
+  mathqa:
+    enabled: true
+    repository: allenai/math_qa
+    license: Apache-2.0
+    splits: [train, validation]
+
+  synthetic_math:
+    enabled: true
+    repository: tohio/slm-synthetic-educational-qa-mcq-math
+    license: MIT
+    sample_only: true
+
+  physics_eval:
+    enabled: false
+    repository: IUTVanguard/PhysicsEval
+    license: CC-BY-SA-4.0
+    reason: Pending underlying source-rights audit and ShareAlike license
+
+  open_trivia:
+    enabled: false
+    repository: https://github.com/uberspot/OpenTriviaQA
+    license: CC-BY-SA-4.0
+    reason: Excluded under strict Permissive Commercial-Safe policy (ShareAlike copyleft)
+
+  learnclash_trivia:
+    enabled: true
+    repository: https://github.com/Pluxia-GmbH/learnclash-open-trivia
+    license: CC-BY-4.0
+
+  indian_exams:
+    enabled: false
+    repository: Abhay557/indian-exams-rawdata
+    license: PROPRIETARY_EXAM_AUTHORITY
+    reason: Original exam-paper content remains IP of respective examination authorities

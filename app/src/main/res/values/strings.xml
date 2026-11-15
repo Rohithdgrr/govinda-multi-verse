@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">GOVINDA</string>
+    <string name="app_subtitle">Offline Adaptive Math Engine</string>
+
+    <!-- Navigation -->
+    <string name="nav_home">Home</string>
+    <string name="nav_settings">Settings</string>
+    <string name="action_back_home">Back to Home</string>
+
+    <!-- Challenge / Home -->
+    <string name="action_submit">Submit</string>
+    <string name="action_new_question">New Question</string>
+    <string name="action_try_another">Try Another Question</string>
+    <string name="action_clear">CLR</string>
+    <string name="action_show_explanation">Show Steps</string>
+    <string name="action_hide_explanation">Hide Steps</string>
+    <string name="feedback_correct">Correct</string>
+    <string name="feedback_incorrect">Not quite</string>
+    <string name="label_expected_answer">Answer</string>
+    <string name="hint_enter_answer">Enter answer…</string>
+
+    <!-- Quiz Lock Service -->
+    <string name="quiz_lock_service_label">GOVINDA App Quiz Lock</string>
+    <string name="quiz_lock_service_description">Detects when a selected locked app is opened fresh so GOVINDA can ask one math question before opening it. Does not read screen text or keystrokes.</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_subtitle">Quiz lock &amp; offline math preferences</string>
+    <string name="action_export_data">Export Learning Data (JSON)</string>
+    <string name="action_reset_data">Reset Learning Profile</string>
+    <string name="dialog_reset_title">Reset All Learning Data?</string>
+    <string name="dialog_reset_body">This permanently clears all skill profiles, attempt history, review queue items, daily progress, and bookmarks from this device.</string>
+    <string name="action_confirm_reset">Reset All</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="privacy_notice_title">Offline &amp; Privacy Guarantee</string>
+    <string name="privacy_notice_body">GOVINDA generates and grades every problem locally on your device. No internet permission, no AI API, no analytics tracking, and no account required.</string>
+</resources>
