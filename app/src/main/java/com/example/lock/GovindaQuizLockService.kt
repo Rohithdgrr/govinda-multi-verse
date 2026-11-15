@@ -7,6 +7,8 @@ import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.content.pm.PackageInstaller
+import android.os.Build
 import android.net.Uri
 import android.provider.Settings
 import android.text.TextUtils
@@ -131,9 +133,40 @@ class GovindaQuizLockService : AccessibilityService() {
             return isServiceEnabled(context) && isOverlayEnabled(context)
         }
 
+        /**
+         * Android 13+ blocks Accessibility for apps not installed by a store
+         * ("Restricted setting" dialog). True when that block is likely.
+         */
+        fun isLikelyRestrictedSideload(context: Context): Boolean {
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) return false
+            return runCatching {
+                val src = context.packageManager
+                    .getInstallSourceInfo(context.packageName).packageSource
+                src != PackageInstaller.PACKAGE_SOURCE_STORE
+            }.getOrDefault(false)
+        }
+
+        /** Opens App info, where the 3-dot menu offers "Allow restricted settings". */
+        fun openAppInfoForRestrictedSettings(context: Context) {
+            runCatching {
+                context.startActivity(
+                    Intent(
+                        Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                        Uri.fromParts("package", context.packageName, null)
+                    ).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                )
+            }
+        }
+
         fun launchAllMissingPermissions(context: Context) {
             val intents = mutableListOf<Intent>()
             if (!isServiceEnabled(context)) {
+                // Sideloaded installs must unlock restricted settings first, otherwise
+                // the Accessibility toggle just shows "Restricted setting".
+                if (isLikelyRestrictedSideload(context)) {
+                    openAppInfoForRestrictedSettings(context)
+                    return
+                }
                 intents += Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
             }
             if (!isOverlayEnabled(context)) {

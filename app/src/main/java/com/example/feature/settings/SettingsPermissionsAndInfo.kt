@@ -434,7 +434,9 @@ fun PermissionDisclosureDialog(
                 "Accessibility Monitor (${if (isAccessibilityEnabled) "Granted" else "Needed"}): detects package transitions only; canRetrieveWindowContent = false.",
                 "Display Over Other Apps (${if (isOverlayEnabled) "Granted" else "Needed"}): lets the quiz lock appear reliably above locked apps.",
                 "Never reads screen text, passwords, notifications, or keystrokes."
-            )
+            ) + if (!isAccessibilityEnabled && GovindaQuizLockService.isLikelyRestrictedSideload(context)) listOf(
+                "Installed from an APK? Android may block Accessibility. Tap ALLOW, then in App info open the ⋮ menu → \"Allow restricted settings\", return here and tap ALLOW again."
+            ) else emptyList()
             primaryActionLabel = "ALLOW ALL PERMISSIONS"
             systemIntent = null
         }
